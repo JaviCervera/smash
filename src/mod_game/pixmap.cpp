@@ -1,6 +1,6 @@
 #include "pixmap.h"
-#include "../core/file.h"
-#include "../core/membuffer.h"
+#include "../mod_core/file.h"
+#include "../mod_core/membuffer.h"
 #include <stdlib.h>
 #include <string.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION

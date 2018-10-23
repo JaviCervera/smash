@@ -1,6 +1,6 @@
 #include "font.h"
 #include "renderer.h"
-#include "../core/file.h"
+#include "../mod_core/file.h"
 #include <math.h>
 #define STB_TRUETYPE_IMPLEMENTATION
 #include "lib/stb_truetype.h"

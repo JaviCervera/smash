@@ -2,8 +2,8 @@
 #define WIDGET_H
 
 #include "../common/refcounter.h"
-#include "../core/dictionary.h"
-#include "../core/string.h"
+#include "../mod_core/dictionary.h"
+#include "../mod_core/string.h"
 
 class QWidget;
 

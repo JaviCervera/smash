@@ -2,7 +2,7 @@
 #define GAME_IMAGE_H
 
 #include "../common/refcounter.h"
-#include "../core/string.h"
+#include "../mod_core/string.h"
 #include "pixmap.h"
 
 class Image : public RefCounter {

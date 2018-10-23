@@ -12,9 +12,9 @@ CONFIG -= qt
 #To build a shared library, uncomment these lines
 CONFIG += shared
 DEFINES += BUILD_SHARED
-win32:LIBS += -L../src/qtiny/Qt/lib/win32-mingw
-mac:LIBS += -L../src/qtiny/Qt/lib/mac
-unix:!mac:LIBS += -L../src/qtiny/Qt/lib/linux
+win32:LIBS += -L../src/mod_qtiny/Qt/lib/win32-mingw
+mac:LIBS += -L../src/mod_qtiny/Qt/lib/mac
+unix:!mac:LIBS += -L../src/mod_qtiny/Qt/lib/linux
 LIBS += -lQt5Core -lQt5Gui -lQt5Widgets -lQt5PrintSupport -lQt5PlatformSupport
 win32:LIBS +=
 mac:LIBS += -lqcocoa -lcocoaprintersupport -lz -framework CoreFoundation -framework Carbon -framework AppKit -framework IOKit -framework OpenGL -lc++
@@ -31,51 +31,51 @@ mac:QMAKE_POST_LINK += cp "$${OUT_PWD}/libsmash.qtiny.mac.1.0.0.dylib" "$${OUT_P
 
 win32:DEFINES += _CRT_SECURE_NO_WARNINGS
 
-INCLUDEPATH += ../src/sdk ../src/qtiny/Qt/include ../src/qtiny/Qt/include/QtCore ../src/qtiny/Qt/include/QtGui ../src/qtiny/Qt/include/QtWidgets
+INCLUDEPATH += ../src/sdk ../src/mod_qtiny/Qt/include ../src/mod_qtiny/Qt/include/QtCore ../src/mod_qtiny/Qt/include/QtGui ../src/mod_qtiny/Qt/include/QtWidgets
 
 SOURCES += \
-    ../src/qtiny/loadmodule.cpp \
-    ../src/qtiny/widget.cpp \
-    ../src/qtiny/window.cpp \
-    ../src/qtiny/app.cpp \
-    ../src/qtiny/button.cpp \
-    ../src/qtiny/event.cpp \
-    ../src/qtiny/moc_event.cpp \
-    ../src/qtiny/checkbox.cpp \
-    ../src/qtiny/requester.cpp \
-    ../src/qtiny/combobox.cpp \
-    ../src/qtiny/editor.cpp \
-    ../src/qtiny/guifont.cpp \
-    ../src/qtiny/guiicon.cpp \
-    ../src/qtiny/frame.cpp \
-    ../src/qtiny/label.cpp \
-    ../src/qtiny/lineedit.cpp \
-    ../src/qtiny/menu.cpp \
-    ../src/qtiny/statusbar.cpp \
-    ../src/qtiny/tabbar.cpp \
-    ../src/qtiny/toolbar.cpp \
-    ../src/qtiny/process.cpp
+    ../src/mod_qtiny/loadmodule.cpp \
+    ../src/mod_qtiny/widget.cpp \
+    ../src/mod_qtiny/window.cpp \
+    ../src/mod_qtiny/app.cpp \
+    ../src/mod_qtiny/button.cpp \
+    ../src/mod_qtiny/event.cpp \
+    ../src/mod_qtiny/moc_event.cpp \
+    ../src/mod_qtiny/checkbox.cpp \
+    ../src/mod_qtiny/requester.cpp \
+    ../src/mod_qtiny/combobox.cpp \
+    ../src/mod_qtiny/editor.cpp \
+    ../src/mod_qtiny/guifont.cpp \
+    ../src/mod_qtiny/guiicon.cpp \
+    ../src/mod_qtiny/frame.cpp \
+    ../src/mod_qtiny/label.cpp \
+    ../src/mod_qtiny/lineedit.cpp \
+    ../src/mod_qtiny/menu.cpp \
+    ../src/mod_qtiny/statusbar.cpp \
+    ../src/mod_qtiny/tabbar.cpp \
+    ../src/mod_qtiny/toolbar.cpp \
+    ../src/mod_qtiny/process.cpp
 
 HEADERS += \ 
     ../src/sdk/smashsdk.h \
     ../src/sdk/angelscript.h \
     ../src/common/refcounter.h \
-    ../src/qtiny/widget.h \
-    ../src/qtiny/window.h \
-    ../src/qtiny/app.h \
-    ../src/qtiny/button.h \
-    ../src/qtiny/event.h \
-    ../src/qtiny/checkbox.h \
-    ../src/qtiny/requester.h \
-    ../src/qtiny/combobox.h \
-    ../src/qtiny/editor.h \
-    ../src/qtiny/guifont.h \
-    ../src/qtiny/guiicon.h \
-    ../src/qtiny/frame.h \
-    ../src/qtiny/label.h \
-    ../src/qtiny/lineedit.h \
-    ../src/qtiny/menu.h \
-    ../src/qtiny/statusbar.h \
-    ../src/qtiny/tabbar.h \
-    ../src/qtiny/toolbar.h \
-    ../src/qtiny/process.h
+    ../src/mod_qtiny/widget.h \
+    ../src/mod_qtiny/window.h \
+    ../src/mod_qtiny/app.h \
+    ../src/mod_qtiny/button.h \
+    ../src/mod_qtiny/event.h \
+    ../src/mod_qtiny/checkbox.h \
+    ../src/mod_qtiny/requester.h \
+    ../src/mod_qtiny/combobox.h \
+    ../src/mod_qtiny/editor.h \
+    ../src/mod_qtiny/guifont.h \
+    ../src/mod_qtiny/guiicon.h \
+    ../src/mod_qtiny/frame.h \
+    ../src/mod_qtiny/label.h \
+    ../src/mod_qtiny/lineedit.h \
+    ../src/mod_qtiny/menu.h \
+    ../src/mod_qtiny/statusbar.h \
+    ../src/mod_qtiny/tabbar.h \
+    ../src/mod_qtiny/toolbar.h \
+    ../src/mod_qtiny/process.h

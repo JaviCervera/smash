@@ -2,7 +2,7 @@
 #define GUIICON_H
 
 #include "../common/refcounter.h"
-#include "../core/string.h"
+#include "../mod_core/string.h"
 
 class QIcon;
 

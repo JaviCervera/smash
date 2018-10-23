@@ -1,7 +1,7 @@
 #ifndef REQUESTER_H
 #define REQUESTER_H
 
-#include "../core/string.h"
+#include "../mod_core/string.h"
 
 // Confirm results
 #define QCONFIRM_CANCEL      0

@@ -2,7 +2,7 @@
 #define MENU_H
 
 #include "widget.h"
-#include "../core/array.h"
+#include "../mod_core/array.h"
 
 class Window;
 class QMenu;

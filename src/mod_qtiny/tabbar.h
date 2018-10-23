@@ -2,7 +2,7 @@
 #define TABBAR_H
 
 #include "widget.h"
-#include "../core/array.h"
+#include "../mod_core/array.h"
 
 class TabBar : public Widget {
 public:

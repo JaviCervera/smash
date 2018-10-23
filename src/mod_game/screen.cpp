@@ -1,6 +1,6 @@
 #include "screen.h"
 #include "main.h"
-#include "../core/time.h"
+#include "../mod_core/time.h"
 #if defined(_WIN32)
 #include "lib/SDL2/win32/SDL.h"
 #include "lib/SDL2/win32/SDL_opengl.h"

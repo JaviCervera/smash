@@ -2,7 +2,7 @@
 #define GAME_SCREEN_H
 
 #include "../common/refcounter.h"
-#include "../core/array.h"
+#include "../mod_core/array.h"
 
 class Screen : public RefCounter {
 public:

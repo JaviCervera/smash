@@ -1,7 +1,7 @@
 #ifndef GAME_FONT_H
 #define GAME_FONT_H
 
-#include "../core/array.h"
+#include "../mod_core/array.h"
 #include "glyph.h"
 #include "image.h"
 

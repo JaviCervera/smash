@@ -1,7 +1,7 @@
 #include "rapidxml.hpp"
 #include "../common/refcounter.h"
-#include "../core/array.h"
-#include "../core/string.h"
+#include "../mod_core/array.h"
+#include "../mod_core/string.h"
 #include "../sdk/smashsdk.h"
 #include "../sdk/angelscript.h"
 

@@ -12,9 +12,9 @@ CONFIG -= qt
 #To build a shared library, uncomment these lines
 CONFIG += shared
 DEFINES += BUILD_SHARED
-win32:LIBS += -L../src/game/lib/SDL2/win32
-mac:LIBS += -L../src/game/lib/SDL2/mac
-unix:!mac:LIBS += -L../src/game/lib/SDL2/linux
+win32:LIBS += -L../src/mod_game/lib/SDL2/win32
+mac:LIBS += -L../src/mod_game/lib/SDL2/mac
+unix:!mac:LIBS += -L../src/mod_game/lib/SDL2/linux
 LIBS += -lSDL2_mixer -lSDL2 -lvorbisfile -lvorbis -logg
 win32:LIBS += -lwinmm -lopengl32 -lgdi32 -lole32 -loleaut32 -luuid -limm32 -lversion
 mac:LIBS += -framework AppKit -framework AudioUnit -framework Carbon -framework CoreAudio -framework ForceFeedback -framework IOKit -framework OpenGL
@@ -34,36 +34,36 @@ win32:DEFINES += _CRT_SECURE_NO_WARNINGS
 INCLUDEPATH += ../src/sdk
 
 SOURCES += \ 
-    ../src/game/loadmodule.cpp \
-    ../src/game/screen.cpp \
-    ../src/game/main.cpp \
-    ../src/game/renderer.cpp \
-    ../src/core/platform.cpp \
-    ../src/game/desktop.cpp \
-    ../src/game/pixmap.cpp \
-    ../src/game/lib/stb_image.c \
-    ../src/game/image.cpp \
-    ../src/game/input.cpp \
-    ../src/game/sound.cpp \
-    ../src/game/channel.cpp \
-    ../src/game/music.cpp \
-    ../src/game/font.cpp
+    ../src/mod_game/loadmodule.cpp \
+    ../src/mod_game/screen.cpp \
+    ../src/mod_game/main.cpp \
+    ../src/mod_game/renderer.cpp \
+    ../src/mod_core/platform.cpp \
+    ../src/mod_game/desktop.cpp \
+    ../src/mod_game/pixmap.cpp \
+    ../src/mod_game/lib/stb_image.c \
+    ../src/mod_game/image.cpp \
+    ../src/mod_game/input.cpp \
+    ../src/mod_game/sound.cpp \
+    ../src/mod_game/channel.cpp \
+    ../src/mod_game/music.cpp \
+    ../src/mod_game/font.cpp
 
 HEADERS += \ 
     ../src/sdk/smashsdk.h \
     ../src/sdk/angelscript.h \
     ../src/common/refcounter.h \
-    ../src/game/screen.h \
-    ../src/game/main.h \
-    ../src/game/renderer.h \
-    ../src/game/desktop.h \
-    ../src/game/pixmap.h \
-    ../src/game/image.h \
-    ../src/game/input.h \
-    ../src/game/sound.h \
-    ../src/game/channel.h \
-    ../src/game/music.h \
-    ../src/game/font.h \
-    ../src/game/glyph.h \
-    ../src/game/lib/stb_image_write.h \
-    ../src/game/lib/stb_truetype.h
+    ../src/mod_game/screen.h \
+    ../src/mod_game/main.h \
+    ../src/mod_game/renderer.h \
+    ../src/mod_game/desktop.h \
+    ../src/mod_game/pixmap.h \
+    ../src/mod_game/image.h \
+    ../src/mod_game/input.h \
+    ../src/mod_game/sound.h \
+    ../src/mod_game/channel.h \
+    ../src/mod_game/music.h \
+    ../src/mod_game/font.h \
+    ../src/mod_game/glyph.h \
+    ../src/mod_game/lib/stb_image_write.h \
+    ../src/mod_game/lib/stb_truetype.h

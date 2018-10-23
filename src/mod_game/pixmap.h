@@ -2,8 +2,8 @@
 #define GAME_PIXMAP_H
 
 #include "../common/refcounter.h"
-#include "../core/membuffer.h"
-#include "../core/string.h"
+#include "../mod_core/membuffer.h"
+#include "../mod_core/string.h"
 
 class Pixmap : public RefCounter {
 public:

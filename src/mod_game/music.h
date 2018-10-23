@@ -1,7 +1,7 @@
 #ifndef GAME_MUSIC_H
 #define GAME_MUSIC_H
 
-#include "../core/string.h"
+#include "../mod_core/string.h"
 
 class Music {
 public:

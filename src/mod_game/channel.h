@@ -1,7 +1,7 @@
 #ifndef GAME_CHANNEL_H
 #define GAME_CHANNEL_H
 
-#include "../core/array.h"
+#include "../mod_core/array.h"
 
 class Channel {
 public:

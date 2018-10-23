@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'event.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.1.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.11.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,47 +12,50 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'event.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.1.1. It"
+#error "This file was generated using the moc from 5.11.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_EventDispatcher_t {
     QByteArrayData data[24];
-    char stringdata[299];
+    char stringdata0[298];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    offsetof(qt_meta_stringdata_EventDispatcher_t, stringdata) + ofs \
-        - idx * sizeof(QByteArrayData) \
+    qptrdiff(offsetof(qt_meta_stringdata_EventDispatcher_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
     )
 static const qt_meta_stringdata_EventDispatcher_t qt_meta_stringdata_EventDispatcher = {
     {
-QT_MOC_LITERAL(0, 0, 15),
-QT_MOC_LITERAL(1, 16, 4),
-QT_MOC_LITERAL(2, 21, 0),
-QT_MOC_LITERAL(3, 22, 13),
-QT_MOC_LITERAL(4, 36, 7),
-QT_MOC_LITERAL(5, 44, 17),
-QT_MOC_LITERAL(6, 62, 17),
-QT_MOC_LITERAL(7, 80, 19),
-QT_MOC_LITERAL(8, 100, 4),
-QT_MOC_LITERAL(9, 105, 10),
-QT_MOC_LITERAL(10, 116, 18),
-QT_MOC_LITERAL(11, 135, 5),
-QT_MOC_LITERAL(12, 141, 11),
-QT_MOC_LITERAL(13, 153, 7),
-QT_MOC_LITERAL(14, 161, 3),
-QT_MOC_LITERAL(15, 165, 10),
-QT_MOC_LITERAL(16, 176, 12),
-QT_MOC_LITERAL(17, 189, 22),
-QT_MOC_LITERAL(18, 212, 5),
-QT_MOC_LITERAL(19, 218, 15),
-QT_MOC_LITERAL(20, 234, 8),
-QT_MOC_LITERAL(21, 243, 20),
-QT_MOC_LITERAL(22, 264, 10),
-QT_MOC_LITERAL(23, 275, 22)
+QT_MOC_LITERAL(0, 0, 15), // "EventDispatcher"
+QT_MOC_LITERAL(1, 16, 4), // "Init"
+QT_MOC_LITERAL(2, 21, 0), // ""
+QT_MOC_LITERAL(3, 22, 13), // "ButtonPressed"
+QT_MOC_LITERAL(4, 36, 7), // "checked"
+QT_MOC_LITERAL(5, 44, 17), // "EditorTextChanged"
+QT_MOC_LITERAL(6, 62, 17), // "EditorCursorMoved"
+QT_MOC_LITERAL(7, 80, 19), // "LineEditTextChanged"
+QT_MOC_LITERAL(8, 100, 4), // "text"
+QT_MOC_LITERAL(9, 105, 10), // "MenuAction"
+QT_MOC_LITERAL(10, 116, 18), // "TabBarChangedIndex"
+QT_MOC_LITERAL(11, 135, 5), // "index"
+QT_MOC_LITERAL(12, 141, 11), // "CloseWindow"
+QT_MOC_LITERAL(13, 153, 7), // "Window*"
+QT_MOC_LITERAL(14, 161, 3), // "win"
+QT_MOC_LITERAL(15, 165, 10), // "SizeWindow"
+QT_MOC_LITERAL(16, 176, 12), // "ProgramError"
+QT_MOC_LITERAL(17, 189, 22), // "QProcess::ProcessError"
+QT_MOC_LITERAL(18, 212, 5), // "error"
+QT_MOC_LITERAL(19, 218, 15), // "ProgramFinished"
+QT_MOC_LITERAL(20, 234, 8), // "exitCode"
+QT_MOC_LITERAL(21, 243, 20), // "QProcess::ExitStatus"
+QT_MOC_LITERAL(22, 264, 10), // "exitStatus"
+QT_MOC_LITERAL(23, 275, 22) // "ProgramOutputAvailable"
+
     },
     "EventDispatcher\0Init\0\0ButtonPressed\0"
     "checked\0EditorTextChanged\0EditorCursorMoved\0"
@@ -61,7 +64,7 @@ QT_MOC_LITERAL(23, 275, 22)
     "Window*\0win\0SizeWindow\0ProgramError\0"
     "QProcess::ProcessError\0error\0"
     "ProgramFinished\0exitCode\0QProcess::ExitStatus\0"
-    "exitStatus\0ProgramOutputAvailable\0"
+    "exitStatus\0ProgramOutputAvailable"
 };
 #undef QT_MOC_LITERAL
 
@@ -79,18 +82,18 @@ static const uint qt_meta_data_EventDispatcher[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   74,    2, 0x0a,
-       3,    1,   75,    2, 0x0a,
-       5,    0,   78,    2, 0x0a,
-       6,    0,   79,    2, 0x0a,
-       7,    1,   80,    2, 0x0a,
-       9,    0,   83,    2, 0x0a,
-      10,    1,   84,    2, 0x0a,
-      12,    1,   87,    2, 0x0a,
-      15,    1,   90,    2, 0x0a,
-      16,    1,   93,    2, 0x0a,
-      19,    2,   96,    2, 0x0a,
-      23,    0,  101,    2, 0x0a,
+       1,    0,   74,    2, 0x0a /* Public */,
+       3,    1,   75,    2, 0x0a /* Public */,
+       5,    0,   78,    2, 0x0a /* Public */,
+       6,    0,   79,    2, 0x0a /* Public */,
+       7,    1,   80,    2, 0x0a /* Public */,
+       9,    0,   83,    2, 0x0a /* Public */,
+      10,    1,   84,    2, 0x0a /* Public */,
+      12,    1,   87,    2, 0x0a /* Public */,
+      15,    1,   90,    2, 0x0a /* Public */,
+      16,    1,   93,    2, 0x0a /* Public */,
+      19,    2,   96,    2, 0x0a /* Public */,
+      23,    0,  101,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -113,6 +116,7 @@ void EventDispatcher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         EventDispatcher *_t = static_cast<EventDispatcher *>(_o);
+        Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->Init(); break;
         case 1: _t->ButtonPressed((*reinterpret_cast< bool(*)>(_a[1]))); break;
@@ -131,9 +135,9 @@ void EventDispatcher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
     }
 }
 
-const QMetaObject EventDispatcher::staticMetaObject = {
+QT_INIT_METAOBJECT const QMetaObject EventDispatcher::staticMetaObject = {
     { &QObject::staticMetaObject, qt_meta_stringdata_EventDispatcher.data,
-      qt_meta_data_EventDispatcher,  qt_static_metacall, 0, 0}
+      qt_meta_data_EventDispatcher,  qt_static_metacall, nullptr, nullptr}
 };
 
 
@@ -144,9 +148,9 @@ const QMetaObject *EventDispatcher::metaObject() const
 
 void *EventDispatcher::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_EventDispatcher.stringdata))
-        return static_cast<void*>(const_cast< EventDispatcher*>(this));
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_EventDispatcher.stringdata0))
+        return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
@@ -166,4 +170,5 @@ int EventDispatcher::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     }
     return _id;
 }
+QT_WARNING_POP
 QT_END_MOC_NAMESPACE
