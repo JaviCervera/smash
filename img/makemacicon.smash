@@ -1,0 +1,66 @@
+#load "core"
+
+const uint8 commaAscii = ",".Asc();
+
+void Main() {
+	String iconFile = "stub.icns";
+	String cppFile = "../src/compiler/icon.mac.cpp";
+
+	// Export icon
+	Print("Exporting '" + iconFile + "'...\n");
+
+	// Copy stub executable into memory buffer
+	File@ inFile = File(iconFile, FILE_READ);
+	uint inSize = inFile.Size();
+	MemBuffer@ inBuffer = MemBuffer(inSize);
+	uint count = inFile.ReadBytes(inBuffer.Buffer(), inSize);
+	Print("Read " + Str(count) + " bytes (file size " + Str(inSize) + " bytes)\n");
+	inFile.Close();
+
+	// Create output buffer
+	String sizeLine = "unsigned int iconSize" + " = " + Str(inSize) + ";\r\n";
+	String prefix = "unsigned char iconData[] = {";
+	String suffix = "};\r\n";
+	uint outSize = sizeLine.Length() + prefix.Length() + suffix.Length() + CalculateRepLength(inBuffer) + inSize - 1;
+	Print("Output file size is " + Str(outSize) + " bytes\n");
+	MemBuffer@ outBuffer = MemBuffer(outSize+1);
+
+	// Write array size and prefix
+	outBuffer.PokeCString(0, sizeLine + prefix);
+
+	// Write all bytes
+	uint offset = (sizeLine + prefix).Length();
+	for ( uint j = 0; j < inSize; j++ ) {
+		String str = Str(inBuffer.PeekUInt8(j));
+		outBuffer.PokeCString(offset, str);
+		offset += str.Length();
+		if ( j < inSize-1 ) outBuffer.PokeUInt8(offset++, commaAscii);
+	}
+
+	// Write suffix
+	outBuffer.PokeCString(offset, suffix);
+
+	// Save file
+	File@ outFile = File(cppFile, FILE_WRITE);
+	count = outFile.WriteBytes(outBuffer.Buffer(), outSize);
+	Print("Written " + Str(count) + " bytes\n");
+	outFile.Close();
+	
+	Print("\n");
+}
+
+// Returns the length of the string representation of all the bytes in a buffer
+uint CalculateRepLength(MemBuffer@ buffer) {
+	uint length = 0;
+	for ( uint i = 0; i < buffer.Size(); i++ ) {
+		uint8 val = buffer.PeekUInt8(i);
+		if ( val >= 100 ) {
+			length += 3;
+		} else if ( val >= 10 ) {
+			length += 2;
+		} else {
+			length += 1;
+		}
+	}
+	return length;
+}

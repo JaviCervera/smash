@@ -1,0 +1,56 @@
+#load "core"
+#load "qtiny"
+#load "xml"
+
+#include "src/ide/config.smash"
+#include "src/ide/controller.smash"
+#include "src/ide/language.smash"
+#include "src/ide/loadxmlgui.smash"
+#include "src/ide/log.smash"
+#include "src/ide/maincontroller.smash"
+
+class Application : IApplication {
+	void OnInit() {
+		// Init log
+		InitLog();
+		WriteLog("Log initialized");
+		
+		// Base filename
+		String baseFile = "ide"; //ProgramName().StripDir();
+		
+		// Parse config
+		String configFile = baseFile + ".config.xml";
+		WriteLog("Parsing config file '" + configFile + "'...");
+		@config = Config(configFile);
+		WriteLog("Config parsed");
+		
+		// Parse language
+		String languageFile = "cfg/" + baseFile + ".language.xml";
+		WriteLog("Parsing language file '" + languageFile + "'...");
+		@language = Language(languageFile);
+		WriteLog("Language file parsed");
+		
+		// Register font
+		config.RegisterFont();
+		
+		// Set MainController as current controller
+		SetController(MainController());
+	}
+	
+	void OnCloseWindow(Window@ window) { controller.OnCloseWindow(window); }
+	void OnSizeWindow(Window@ window) { controller.OnSizeWindow(window); }
+	void OnMenuAction(int id) { controller.OnMenuAction(id); }
+	void OnWidgetAction(Widget@ widget, int data) { controller.OnWidgetAction(widget, data); }
+	void OnProcessFinish(Process@ process, int exitCode) { controller.OnProcessFinish(process, exitCode); }
+	void OnProcessOutput(Process@ process) { controller.OnProcessOutput(process); }
+	void OnProcessError(Process@ process, bool crashed) { controller.OnProcessError(process, crashed); }
+	
+	const Controller@ GetController() const { return controller; }
+	void SetController(Controller@ controller) { @this.controller = controller; }
+	const Config@ GetConfig() const { return config; }
+	const Language@ GetLanguage() const { return language; }
+	
+	private Controller@ controller;
+	private Config@ config;
+	private Language@ language;
+}

@@ -1,0 +1,13 @@
+#load "core"
+#include "engine/engine.smash"
+
+const bool FULLSCREEN = false;
+
+void Main() {
+	if ( FULLSCREEN )
+		OpenScreen(DesktopWidth(), DesktopHeight(), true);
+	else
+		OpenScreen(800, 600, false);
+	
+	Font font("data/silkscreenb.png");
+}

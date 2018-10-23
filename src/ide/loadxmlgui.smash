@@ -1,0 +1,76 @@
+class GUICoords {
+	int x;
+	int y;
+	int w;
+	int h;
+}
+
+Dictionary@ LoadXMLGUI(const String& in filename, Widget@ rootWidget) {
+	// Read XML file into string
+	String xmlStr = ReadString(filename);
+	if ( xmlStr == "" ) return null;
+	
+	// Parse XML
+	XMLDocument doc(xmlStr);
+	if ( !doc.IsOk() ) return null;
+		
+	// Create dictionary
+	Dictionary@ dict = Dictionary();
+		
+	// Parse all children of the main interface
+	for ( uint i = 0; i < doc.Root().CountChildren(); i++ ) {
+		_ParseGUINode(doc.Root().Child(i), dict, rootWidget);
+	}
+		
+	return dict;
+}
+
+void _ParseGUINode(const XMLElement@ node, Dictionary@ dict, Widget@ parent) {
+	// Parse correct type of node
+	Widget@ handle = null;
+	if ( node.Name() == "window" ) @handle = _ParseWindowNode(node, parent);
+	
+	// Add to dictionary
+	if ( !(node.Attribute("key") is null) && !(handle is null) ) {
+		dict.Set(node.Attribute("key").Value(), @handle);
+	}
+	
+	// Parse node children
+	for ( uint i = 0; i < node.CountChildren(); i++ ) _ParseGUINode(node.Child(i), dict, handle);
+}
+
+Window@ _ParseWindowNode(const XMLElement@ node, Widget@ parent) {
+	// Dictionary of flags
+	Dictionary flagsDict;
+	flagsDict.Set("QWINDOW_STANDARD", QWINDOW_STANDARD);
+	flagsDict.Set("QWINDOW_TOOL", QWINDOW_TOOL);
+	flagsDict.Set("QWINDOW_MODAL", QWINDOW_MODAL);
+	flagsDict.Set("QWINDOW_SHEET", QWINDOW_SHEET);
+	flagsDict.Set("QWINDOW_CENTERED", QWINDOW_CENTERED);
+	
+	// Parse parameters
+	const XMLElement@ titleNode = node.Child(0, "title");
+	GUICoords@ coords = _ParseGUICoords(node.Child(0, "coords"));
+	int flags = 0;
+	for ( uint i = 0; i < node.CountChildren("flag"); i++ ) {
+		int flag;
+		const XMLElement@ flagNode = node.Child(i, "flag");
+		flagsDict.Get(flagNode.Value().Trim(), flag);
+		flags += flag;
+	}
+	
+	// Create window
+	Window@ win = Window(parent, coords.x, coords.y, coords.w, coords.h, flags);
+	win.SetTitle(titleNode.Value());
+	
+	return win;
+}
+
+GUICoords@ _ParseGUICoords(const XMLElement@ node) {
+	GUICoords coords;
+	coords.x = node.Attribute("x").Value().ToInt();
+	coords.y = node.Attribute("y").Value().ToInt();
+	coords.w = node.Attribute("width").Value().ToInt();
+	coords.h = node.Attribute("height").Value().ToInt();
+	return coords;
+}

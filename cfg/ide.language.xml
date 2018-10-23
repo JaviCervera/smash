@@ -1,0 +1,18 @@
+<language case_sensitive="true">
+	<keywords>and bool break case cast class const continue default do double else enum false final float for from funcdef get if import in inout int interface int8 int16 int32 int64 is mixin namespace not null or out override private return set shared super switch this true typedef uint uint8 uint16 uint32 uint64 void while xor</keywords>
+	<rule regex="\b[0-9]+(\.[0-9]+)?" id="numbers"/>
+	<rule regex="&quot[^&quot]*&quot" id="strings"/>
+	<rule regex="//[^\n]*" id="comments"/>
+	<rule regex="^\#[^\n]*" id="preprocessor"/>
+	<commands>
+		<compile:win>./bin/smashc.win32.exe -check "%F"</compile:win>
+		<build:win>./bin/smashc.win32.exe "%F"</build:win>
+		<run:win>./bin/smashc.win32.exe -run "%F"</run:win>
+		<compile:mac>./bin/smashc.mac -check "%F"</compile:mac>
+		<build:mac>./bin/smashc.mac "%F"</build:mac>
+		<run:mac>./bin/smashc.mac -run "%F"</run:mac>
+		<compile:linux>./bin/smashc.linux -check "%F"</compile:linux>
+		<build:linux>./bin/smashc.linux "%F"</build:linux>
+		<run:linux>./bin/smashc.linux -run "%F"</run:linux>
+	</commands>
+</language>

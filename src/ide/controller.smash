@@ -1,0 +1,9 @@
+class Controller {
+	void OnCloseWindow(Window@ window) {}
+	void OnSizeWindow(Window@ window) {}
+	void OnMenuAction(int id) {}
+	void OnWidgetAction(Widget@ widget, int data) {}
+	void OnProcessFinish(Process@ process, int exitCode) {}
+	void OnProcessOutput(Process@ process) {}
+	void OnProcessError(Process@ process, bool crashed) {}
+}

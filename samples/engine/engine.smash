@@ -1,0 +1,5 @@
+#load "game"
+
+#include "emitter.smash"
+#include "particle.smash"
+#include "sprite.smash"

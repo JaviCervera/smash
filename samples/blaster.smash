@@ -1,0 +1,99 @@
+#load "core"
+#load "game"
+
+class Game {
+	bool Init() {
+		// Create screen
+		OpenScreen(640, 480, false);
+		
+		// Change to data dir
+		ChangeDir("data");
+		
+		// Load font
+		@font = Font("silkscreenb.png");
+		
+		// Draw loading screen
+		ClearScreen(Color(0, 0, 0));
+		font.Draw("LOADING ...", (ScreenWidth() - font.TextWidth("LOADING ..."))/2, (ScreenHeight() - font.TextHeight("LOADING ..."))/2);
+		RefreshScreen();
+		
+		// Load images
+		@tile = Image("tile.png", 1, 1);
+		@player = Image("player.png", 3, 1);
+		player.SetHandle(player.Width()/2, player.Height()/2);
+		
+		// Generate shadow image
+		Pixmap pixmap("player.png");
+		for ( uint pixel = 0; pixel < pixmap.Width()*pixmap.Height() - 1; pixel++ ) {
+			if ( Alpha(pixmap.Buffer().PeekInt(pixel*4)) != 0 ) {
+				pixmap.Buffer().PokeInt(pixel*4, Color(0, 0, 0));
+			}
+		}
+		@shadow = Image(pixmap, 3, 1);
+		shadow.SetHandle(shadow.Width()/2, shadow.Height()/2);
+		
+		// Position player
+		x = ScreenWidth()/2;
+		y = ScreenHeight()*3/4;
+		
+		return true;
+	}
+	
+	bool Update() {
+		// Terminate if screen is closed or Esc is pressed
+		if ( !ScreenOpened() ) return false;
+		if ( KeyPressed(KEY_ESCAPE) ) return false;
+		
+		// Update player
+		frame = 0;
+		if ( KeyPressed(KEY_LEFT) ) { x -= 256*DeltaTime(); frame = 1; }
+		if ( KeyPressed(KEY_RIGHT) ) { x += 256*DeltaTime(); frame = 2; }
+		
+		// Update scroll
+		offsety -= 64*DeltaTime();
+		
+		return true;
+	}
+	
+	void Render() {
+		ClearScreen(Color(0, 0, 0));
+		
+		// Draw tiles
+		tile.DrawTiled(0, offsety, 0, 0, ScreenWidth(), ScreenHeight());
+		
+		// Draw shadow
+		SetColor(Color(255, 255, 255, 125));
+		shadow.Draw(x - 16, y + 8, frame);
+		
+		// Draw player
+		SetColor(Color(255, 255, 255, 255));
+		player.Draw(x, y, frame);
+		
+		// Draw FPS
+		font.Draw(Str(ScreenFPS()).LSet(3, "0") + " FPS", 0, 0);
+	
+		RefreshScreen();
+	}
+	
+	void Finish() {
+		CloseScreen();
+	}
+	
+	Font@ font;
+	Image@ tile;
+	Image@ player;
+	Image@ shadow;
+	float x, y;
+	float offsety;
+	int frame;
+}
+
+void Main() {
+	Game game;
+	if ( game.Init() ) {
+		while ( game.Update() ) {
+			game.Render();
+		}
+	}
+	game.Finish();
+}

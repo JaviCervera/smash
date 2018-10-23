@@ -1,0 +1,13 @@
+#load "core"
+#load "xml"
+
+void Main() {
+	XMLDocument@ xml = XMLDocument(ReadString("data/map.tmx"));
+	if ( !xml.IsOk() ) {
+		Print("Could not parse XML: " + xml.Error() + "\n");
+		return;
+	}
+	
+	Print(xml.Root().Name() + "\n");
+	Print(Str(xml.Root().CountChildren()) + "\n");
+}

@@ -1,0 +1,9 @@
+Mac:
+
+./configure -opensource -confirm-license -release -no-pch -static -nomake examples -nomake demos -nomake tests -skip qtwebkit -no-icu -platform macx-clang-32
+
+
+
+Win32:
+
+configure.bat -opensource -confirm-license -release -static -nomake examples -nomake demos -nomake tests -skip qtwebkit -no-icu -platform win32-g++ -opengl desktop

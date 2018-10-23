@@ -1,0 +1,7 @@
+#load "core"
+#load "game"
+
+void Main() {
+	Pixmap pixmap("data/joystix monospace.ttf", 16);
+	pixmap.Write("joystix.png");
+}

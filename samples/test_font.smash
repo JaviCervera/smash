@@ -1,0 +1,23 @@
+#load "core"
+#load "game"
+
+const String text = "Hello world!";
+
+void Main() {
+	OpenScreen(800, 600, false);
+	
+	Font font("data/Pacifico.ttf", 24);
+	
+	while ( ScreenOpened() && !KeyPressed(KEY_ESCAPE) ) {
+		ClearScreen();
+		
+		SetColor(Color(255, 128, 0));
+		DrawRect(0, 0, font.TextWidth(text), 24);
+		SetColor(Color(255, 0, 0));
+		DrawRect(0, 0, font.TextWidth(text), font.TextHeight(text));
+		SetColor(Color(255, 255, 255));
+		font.Draw(text, 0, 0);
+		
+		RefreshScreen();
+	}
+}

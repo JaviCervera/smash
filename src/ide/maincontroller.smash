@@ -1,0 +1,57 @@
+class MainController : Controller {
+	MainController() {
+		buildTab = -1;
+		jumpEnabled = true;
+		
+		// Load GUI for this controller
+		WriteLog("Parsing main interface file...");
+		Dictionary@ guiObjects = LoadXMLGUI("cfg/mainwindow.xml", null);
+		WriteLog("Interface file parsed");
+		if ( !guiObjects.Get("win", @win) ) {
+			Notify(null, "", "Could not get handle", QNOTIFY_INFORMATION);
+		}
+		guiObjects.Get("menu", @menubar);
+		guiObjects.Get("toolbar", @toolbar);
+		guiObjects.Get("tabbar", @tabbar);
+		guiObjects.Get("statusbar", @statusbar);
+		
+		//if ( win is null ) Notify(null, "", "win is null", QNOTIFY_INFORMATION);
+		
+		if ( IsInitialized() ) {
+			// Set window title from config (ignore the one in the interface XML)
+			
+			win.Show(true);
+		}
+	}
+	
+	bool IsInitialized() const { return !(win is null); }
+	
+	void OnCloseWindow(Window@ window) {
+		if ( @window == @win ) Exit(0);
+	}
+	
+	void OnSizeWindow(Window@ window) {
+	}
+	
+	void OnMenuAction(int id) {
+	}
+	
+	void OnWidgetAction(Widget@ widget, int data) {
+	}
+	
+	private Window@ win;
+	private MenuBar@ menubar;
+	private ToolBar@ toolbar;
+	private TabBar@ tabbar;
+	private StatusBar@ statusbar;
+	private ComboBox@ functionCombo;
+	private String statusText;
+	private int buildTab;
+	private int functionUpdateLastMillisecs;
+	private String lastFunctionList;
+	private Array<int> functionLines;
+	private bool jumpEnabled;	// We set this to false when updating the ComboBox
+	//Array<WidgetLayout> widgets;
+	String findText;
+	bool matchCase;
+}

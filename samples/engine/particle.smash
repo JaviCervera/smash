@@ -1,0 +1,36 @@
+class Particle : Sprite {
+	Particle(Image@ image, double velx, double vely, double angvel, double lifetime, bool autofade) {
+		super(image);
+		this.velx = velx;
+		this.vely = vely;
+		this.angvel = angvel;
+		this.lifetime = lifetime;
+		initialLifetime = lifetime;
+		this.autofade = autofade;
+		SetBlendMode(MODE_ADDITIVE);
+	}
+	
+	double Lifetime() const { return lifetime; }
+	
+	void Update() {
+		Sprite::Update();
+		
+		// Update lifetime
+		lifetime -= DeltaTime();
+		if ( lifetime < 0 ) lifetime = 0;
+		
+		// Update position and angle
+		SetX(x + velx*DeltaTime());
+		SetY(y + vely*DeltaTime());
+		SetAngle(Angle() + angvel*DeltaTime());
+		
+		// Update alpha
+		if ( autofade ) SetColor(Red(this.Color()), Green(this.Color()), Blue(this.Color()), lifetime*255/initialLifetime);
+	}
+	
+	private double velx, vely;
+	private double angvel;
+	private double lifetime;
+	private double initialLifetime;
+	private bool autofade;
+}

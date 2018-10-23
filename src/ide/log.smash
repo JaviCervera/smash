@@ -1,0 +1,7 @@
+void InitLog() {
+	"".Write("log.txt", false);
+}
+
+void WriteLog(const String& in msg) {
+	(msg + "\n").Write("log.txt", true);
+}

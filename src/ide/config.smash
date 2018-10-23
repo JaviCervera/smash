@@ -1,0 +1,114 @@
+class Config {
+	Config(const String& in filename) {
+		isValid = false;
+		@font = null;
+	
+		// Get platform string
+		String platform;
+		if ( PlatformId() == PLATFORM_WINDOWS ) {
+			platform = "win";
+		} else if ( PlatformId() == PLATFORM_MAC ) {
+			platform = "mac";
+		} else if ( PlatformId() == PLATFORM_LINUX ) {
+			platform = "linux";
+		}
+		
+		// Read XML file into string
+		String xmlStr = ReadString(filename);
+		if ( xmlStr == "" ) return;
+		
+		// Parse XML
+		XMLDocument doc(xmlStr);
+		if ( !doc.IsOk() ) return;
+		
+		// Get "config" root node
+		const XMLElement@ root = doc.Root();
+		if ( root.Name() != "config" ) return;
+		
+		// Parse global data
+		WriteLog("Parsing global data...");
+		const XMLElement@ elem = root.Child(0, "about");
+		winTitle = root.Child(0, "wintitle").Value();
+		about = root.Child(0, "about").Value();
+		fileFilter = root.Child(0, "filefilter").Value();
+		defaultExt = root.Child(0, "defaultext").Value();
+		tabSize = root.Child(0, "tabsize").Value().ToInt();
+		
+		// Check if we have to register a font
+		const XMLElement@ registerNode = root.Child(0, "font").Child(0, "register");
+		if ( !(registerNode is null) ) {
+			WriteLog("Registering font...");
+			registerFont = registerNode.Value();
+			WriteLog("Font '" + registerFont + "' registered");
+		}
+		
+		// Parse font data
+		WriteLog("Parsing font data...");
+		const XMLElement@ nameNode = root.Child(0, "font").Child(0, "name:" + platform);
+		if ( nameNode is null ) @nameNode = root.Child(0, "font").Child(0, "name");
+		fontName = nameNode.Value();
+		const XMLElement@ sizeNode = root.Child(0, "font").Child(0, "size:" + platform);
+		if ( sizeNode is null ) @sizeNode = root.Child(0, "font").Child(0, "size");
+		fontSize = sizeNode.Value().ToInt();
+		fontBold = root.Child(0, "font").Child(0, "flags").Attribute("bold").Value() == "true";
+		fontItalic = root.Child(0, "font").Child(0, "flags").Attribute("italic").Value() == "true";
+		fontUnderline = root.Child(0, "font").Child(0, "flags").Attribute("underline").Value() == "true";
+		
+		// Parse color data
+		WriteLog("Parsing color data...");
+		colorBackground = root.Child(0, "colors").Child(0, "background").Attribute("rgb").Value().ToInt();
+		colorForeground = root.Child(0, "colors").Child(0, "foreground").Attribute("rgb").Value().ToInt();
+		colorComments = root.Child(0, "colors").Child(0, "comments").Attribute("rgb").Value().ToInt();
+		colorStrings = root.Child(0, "colors").Child(0, "strings").Attribute("rgb").Value().ToInt();
+		colorKeywords = root.Child(0, "colors").Child(0, "keywords").Attribute("rgb").Value().ToInt();
+		colorNumbers = root.Child(0, "colors").Child(0, "numbers").Attribute("rgb").Value().ToInt();
+		colorPreprocessor = root.Child(0, "colors").Child(0, "preprocessor").Attribute("rgb").Value().ToInt();
+		colorSymbols = root.Child(0, "colors").Child(0, "symbols").Attribute("rgb").Value().ToInt();
+		
+		isValid = true;
+	}
+	
+	bool IsValid() const { return isValid; }
+	const String& WinTitle() const { return winTitle; }
+	const String& FileFilter() const { return fileFilter; }
+	const String& DefaultExt() const { return defaultExt; }
+	int TabSize() const { return tabSize; }
+	const GUIFont@ Font() const { return font; }
+	int ColorBackground() const { return colorBackground; }
+	int ColorForeground() const { return colorForeground; }
+	int ColorComments() const { return colorComments; }
+	int ColorStrings() const { return colorStrings; }
+	int ColorKeywords() const { return colorKeywords; }
+	int ColorNumbers() const { return colorNumbers; }
+	int ColorPreprocessor() const { return colorPreprocessor; }
+	int ColorSymbols() const { return colorSymbols; }
+	
+	void RegisterFont() {
+		if ( registerFont != "" ) {
+			RegisterGUIFont(registerFont);
+			@font = GUIFont(fontName, fontSize, fontBold, fontItalic, fontUnderline);
+		}
+	}
+	
+	private bool isValid;
+	private String winTitle;
+	private String about;
+	private String fileFilter;
+	private String defaultExt;
+	private int tabSize;
+	private String registerFont;
+	private String fontName;
+	private int fontSize;
+	private bool fontBold;
+	private bool fontItalic;
+	private bool fontUnderline;
+	private GUIFont@ font;
+	private int colorBackground;
+	private int colorForeground;
+	private int colorComments;
+	private int colorStrings;
+	private int colorKeywords;
+	private int colorNumbers;
+	private int colorPreprocessor;
+	private int colorSymbols;
+}

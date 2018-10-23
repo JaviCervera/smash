@@ -1,0 +1,108 @@
+class SyntaxRule {
+	String regex;
+	String id;
+}
+
+class Language {
+	Language(const String& in filename) {
+		isValid = false;
+	
+		// Get platform string
+		String platform;
+		if ( PlatformId() == PLATFORM_WINDOWS ) {
+			platform = "win";
+		} else if ( PlatformId() == PLATFORM_MAC ) {
+			platform = "mac";
+		} else if ( PlatformId() == PLATFORM_LINUX ) {
+			platform = "linux";
+		}
+		
+		// Read XML file into string
+		String xmlStr = ReadString(filename);
+		if ( xmlStr == "" ) return;
+		
+		// Parse XML
+		XMLDocument doc(xmlStr);
+		if ( !doc.IsOk() ) return;
+		
+		// Get "language" root node
+		const XMLElement@ root = doc.Root();
+		if ( root.Name() != "language" ) return;
+		
+		// Parse case sensitiveness
+		const XMLAttribute@ sensitiveAttr = root.Attribute("case_sensitive");
+		if ( !(sensitiveAttr is null) ) caseSensitive = sensitiveAttr.Value() == "true";
+		
+		// Parse keywords
+		keywords = root.Child(0, "keywords").Value();
+		
+		// Parse multiline comment format
+		if ( !(root.Child(0, "multilinecomments") is null) ) {
+			multilineBegin = root.Child(0, "multilinecomments").Attribute("begin").Value().Replace("&quot", "\\\"");
+			multilineEnd = root.Child(0, "multilinecomments").Attribute("end").Value().Replace("&quot", "\\\"");
+		}
+		
+		// Parse syntax rules
+		for ( uint i = 0; i < root.CountChildren("rule"); i++ ) {
+			const XMLElement@ ruleNode = root.Child(i, "rule");
+			SyntaxRule rule();
+			rule.regex = ruleNode.Attribute("regex").Value().Replace("&quot", "\\\"");
+			rule.id = ruleNode.Attribute("id").Value();
+			//rules.Add(rule);
+		}
+		
+		// Parse commands
+		const XMLElement@ commandsNode = root.Child(0, "commands");
+		if ( !(commandsNode is null) ) {
+			Array<String> commands = {"compile", "build", "run", "debug"};
+			Array<Array<String>@> dest = {@compileCmds, @buildCmds, @runCmds, @debugCmds};
+			
+			// Get all commands
+			for ( uint i = 0; i < commands.Length(); i++ ) {
+				// Get command string
+				String commandStr = "";
+				if ( !(commandsNode.Child(0, commands[i] + ":" + platform) is null) ) {
+					commandStr = commandsNode.Child(0, commands[i] + ":" + platform).Value().Replace("\r\n", "\n").Replace("\r", "\n");
+				} else if ( !(commandsNode.Child(0, commands[i]) is null) ) {
+					commandStr = commandsNode.Child(0, commands[i]).Value().Replace("\r\n", "\n").Replace("\r", "\n");
+				}
+				
+				// Add to list of commands
+				if ( commandStr != "" ) {
+					String[] commandLines = commandStr.Split("\n");
+					for ( uint j = 0; j < commandLines.Length(); j++ ) {
+						String command = commandLines[j].Trim();
+						if ( command != "" ) {
+							WriteLog("Adding " + commands[i] + " command '" + command + "'");
+							//dest[i].Add(command);
+						}
+					}
+				}
+			}
+		}
+		
+		isValid = true;
+	}
+	
+	bool IsValid() const { return isValid; }
+	bool IsCaseSensitive() const { return caseSensitive; }
+	const String& Keywords() const { return keywords; }
+	const String& MultilineBegin() const { return multilineBegin; }
+	const String& MultilineEnd() const { return multilineEnd; }
+	const Array<SyntaxRule>& Rules() const { return rules; }
+	const Array<String>& CompileCommands() const { return compileCmds; }
+	const Array<String>& BuildCommands() const { return buildCmds; }
+	const Array<String>& RunCommands() const { return runCmds; }
+	const Array<String>& DebugCommands() const { return debugCmds; }
+	
+	private bool isValid;
+	private bool caseSensitive;
+	private String keywords;
+	private String multilineBegin;
+	private String multilineEnd;
+	private Array<SyntaxRule> rules;
+	private Array<String> compileCmds;
+	private Array<String> buildCmds;
+	private Array<String> runCmds;
+	private Array<String> debugCmds;
+}

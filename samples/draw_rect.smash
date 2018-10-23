@@ -1,0 +1,16 @@
+#load "core"
+#load "game"
+
+void Main() {
+	OpenScreen(800, 600, false);
+	
+	Image img("data/tiles.png");
+	
+	while ( ScreenOpened() && !KeyPressed(KEY_ESCAPE) ) {
+		ClearScreen();
+		
+		img.Draw(0, 0, 0, 0, 0, 0, 64, 128, 64, 64);
+		
+		RefreshScreen();
+	}
+}

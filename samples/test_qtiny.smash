@@ -1,0 +1,53 @@
+#load "core"
+#load "qtiny"
+
+class Application : IApplication {
+	void OnInit() {
+		@win = Window(null, 0, 0, 640, 480, QWINDOW_CENTERED);
+		win.SetTitle("Smash with Qt!");
+		
+		@button = Button(win, "Ok");
+		
+		@checkbox = CheckBox(win, "Check me!");
+		checkbox.SetLayout(checkbox.X(), checkbox.Y()+24, checkbox.Width(), checkbox.Height());
+		
+		@combobox = ComboBox(win);
+		combobox.SetLayout(combobox.X(), combobox.Y()+48, combobox.Width(), combobox.Height());
+		for ( uint i = 0; i < 10; i++ ) {
+			combobox.AddItem("Item " + Str(i));
+		}
+		
+		win.Show(true);
+	}
+	
+	void OnCloseWindow(Window& in window) {
+		if ( @window == @win ) {
+			Exit(0);
+		}
+	}
+	
+	void OnSizeWindow(Window& in window) {
+		if ( @window == @win ) {
+			Notify(win, "", "Window sized to " + Str(window.Width()) + "x" + Str(window.Height()) + "\n", QNOTIFY_INFORMATION);
+		}
+	}
+	
+	void OnMenuAction(int id) {}
+	
+	void OnWidgetAction(Widget& in widget, int data) {
+		if ( @widget == @button ) Notify(win, "", "Button pressed", QNOTIFY_INFORMATION);
+		else if ( @widget == @checkbox ) Notify(win, "", "CheckBox pressed", QNOTIFY_INFORMATION);
+		else if ( @widget == @combobox ) Notify(win, "", "ComboBox changed index: " + Str(data), QNOTIFY_INFORMATION);
+	}
+	
+	void OnProcessFinish(Process& in process, int exitCode) {}
+	
+	void OnProcessOutput(Process& in process) {}
+	
+	void OnProcessError(Process& in process, bool crashed) {}
+	
+	private Window@ win;
+	private Button@ button;
+	private CheckBox@ checkbox;
+	private ComboBox@ combobox;
+}

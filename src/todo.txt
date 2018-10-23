@@ -1,0 +1,42 @@
+V0.1 (private beta):
++ Fix Mac app bundle startup path
++ Build AngelScript as a static library
++ Add bitmap font rendering
++ Add simple class documentation
++ Add key scancodes
++ Add sample
+
+V0.2
++ Do not embed stubs in compiler
+- Move to Swan
+- Add GLFW module
+- Add GLES20 module
+- Add SDL2, SDL2_mixer, etc. modules
+- Add custom platform switch (-win32, -mac, -linux)
+- Add -modpath=... option
+
+V0.3
+- Add GUI module based on LCL
+* Add XML module
+- Add JSON module
+- Add INI module
+- Add Regex module
+- Add IDE
+- Test Array class?
+
+V1.0 (public release)
+- Add FreeBSD target
+- Add documentation
+- Create website and release to the public as GPL (zlib/LGPL for modules)
+
+V1.1
+- Add closed-source iOS target
+- Release Smash for iPad
+
+V1.2
+- Add closed-source Android target
+- Release Smash for Android tablets
+
+V1.3
+- Add closed-source Windows RT target
+- Release Smash for Windows Store

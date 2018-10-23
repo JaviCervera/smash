@@ -1,0 +1,82 @@
+class Emitter {
+	Emitter(Image@ image, bool autofade) {
+		@this.image = @image;
+		this.autofade = autofade;
+		blendMode = BLEND_ADDITIVE;
+		SetPosition(0, 0);
+		SetRate(1, 10);
+		SetVelX(0, 0);
+		SetVelY(0, 0);
+		SetAngVel(0, 0);
+		SetLifetime(1, 5);
+		SetColor(Color(0, 0, 0), Color(255, 255, 255));
+		Stop();
+	}
+	
+	void SetPosition(double x, double y) { SetX(x); SetY(y); }
+	double SetX(double x) { this.x = x; }
+	double SetY(double y) { this.y = y; }
+	double X() const { return x; }
+	double Y() const { return y; }
+	
+	void SetRate(double min, double max) { minrate = min; maxrate = max; }
+	void SetVelX(double min, double max) { minvelx = min; maxvelx = max; }
+	void SetVelY(double min, double max) { minvely = min; maxvely = max; }
+	void SetAngVel(double min, double max) { minangvel = min; maxangvel = max; }
+	void SetLifetime(double min, double max) { minlifetime = min; maxlifetime = max; }
+	void SetColor(int min, int max) { mincolor = min; maxcolor = max; }
+	void SetBlendMode(int mode) { blendMode = mode; }
+	
+	void Start() { emitting = true; }
+	void Stop() { emitting = false; }
+	bool IsEmitting() const { return emitting; }
+	
+	void Update() {
+		// Generate new particles
+		if ( emitting ) {
+			uint numparticles = Rand(minrate, maxrate) * DeltaTime();
+			for ( uint i = 0; i < numparticles; i++ ) {
+				particles.InsertLast(Particle(image, Rand(minvelx, maxvelx), Rand(minvely, maxvely), Rand(minangvel, maxangvel), Rand(minlifetime, maxlifetime), autofade));
+				Particle& part = particles[particles.Length()-1];
+				part.SetBlendMode(blendMode);
+				part.SetPosition(x, y);
+				part.SetColor(Rand(Red(mincolor), Red(maxcolor)), Rand(Green(mincolor), Green(maxcolor)), Rand(Blue(mincolor), Blue(maxcolor)));
+			}
+		}
+		
+		// Update particles
+		Array<uint> clearArray;
+		for ( uint i = 0; i < particles.Length(); i++ ) {
+			Particle& part = particles[i];
+			part.Update();
+			if ( part.Lifetime() <= 0 ) clearArray.InsertLast(i);
+		}
+		
+		// Remove finished particles
+		clearArray.SortDesc();
+		for ( uint i = 0; i < clearArray.Length(); i++ ) {
+			particles.RemoveAt(clearArray[i]);
+		}
+	}
+	
+	void Render() {
+		for ( uint i = 0; i < particles.Length(); i++ ) {
+			particles[i].Render();
+		}
+	}
+	
+	private Image@ image;
+	private bool autofade;
+	private double x, y;
+	
+	private double minrate, maxrate;
+	private double minvelx, maxvelx;
+	private double minvely, maxvely;
+	private double minangvel, maxangvel;
+	private double minlifetime, maxlifetime;
+	private int mincolor, maxcolor;
+	private int blendMode;
+	
+	bool emitting;
+	Array<Particle>@ particles;
+}

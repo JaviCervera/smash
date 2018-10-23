@@ -1,0 +1,18 @@
+#load "core"
+
+class S {
+	S(String s) {
+		this.s = s;
+	}
+	String s;
+}
+
+void Main() {
+	S[] s;
+	for ( uint32 i = 0; i < 5; i++ ) {
+		s.insertLast(S("a"));
+	}
+	for ( uint32 i = 0; i < s.length; i++ ) {
+		Print(s[i].s);
+	}
+}
